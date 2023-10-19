@@ -576,12 +576,15 @@ def format_xticks(
     nticks = kwargs.get("nticks", 5)
     xtick_size = kwargs.get("xtick_size", 10)
     xticklabels = kwargs.get("xticklabels", None)
-    if ll is not None:
-        xlowerlimit = dataframe[ll].min()
-        xupperlimit = dataframe[hl].max()
-    else:
-        xlowerlimit = 1.1 * dataframe[estimate].min()
-        xupperlimit = 1.1 * dataframe[estimate].max()
+    xlowerlimit = kwargs.get("xlowerlimit", None)
+    xupperlimit = kwargs.get("xupperlimit", None)
+    if xlowerLimit is None:
+        if ll is not None:
+            xlowerlimit = dataframe[ll].min()
+            xupperlimit = dataframe[hl].max()
+        else:
+            xlowerlimit = 1.1 * dataframe[estimate].min()
+            xupperlimit = 1.1 * dataframe[estimate].max()
     ax.set_xlim(xlowerlimit, xupperlimit)
     if xticks is not None:
         ax.set_xticks(xticks)
